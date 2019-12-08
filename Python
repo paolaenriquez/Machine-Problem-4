@@ -1,0 +1,65 @@
+#A program that plots the trajectory
+#from initial height to the ground
+#a projectile accelerating both in the horizontal 
+#and vertical directions
+
+#To math equations from math import<fnuction>
+#To access numpy library
+#To import matplotlib.pyplot library
+from math import*
+import matplotlib.pyplot as plt
+import numpy as np
+
+#Input the initial height of the projectile above the ground in meters
+h = float(input('Enter an Initial Height: '))
+
+#Input the magnitude of the velocity in m/s
+mv = float(input('Enter a magnitude of the velocity(m/s): '))
+
+#Input the angle in degrees with respect to the +x-azis at which the projectile is fired
+ad = float(input('Enter an angle with respect to +x-axis: '))
+#Converting angle to rad
+ar = (ad*np.pi) / 180
+
+#Input the x-component of the acceleration, considering the sign, in m/s^2
+axc = float(input('Enter a x-component of the acceleration(m/s^2): '))
+
+
+def mp4():
+#Input the y-component of the acceleration, considering the sign in m/s^2
+#The vertical acceleration should not be equal to 0
+    ayc = float(input('Enter a y-component of the acceleration(m/s^2): '))
+    for ayc in range(0):
+        if ayc is 0:
+            print('The vertical acceleration should not be 0')
+        else:
+            pass
+        return ayc
+    
+#Getting the distance 
+    d = np.sqrt((mv*np.sin(ar))**2 - 4*(1/2*ayc)*h)
+#Getting the final time
+    ft = (-mv*np.sin(ar)+d) / ayc
+#Getting time from
+    if ft > 0:
+        t = np.linspace(0,ft)
+    if ft <=0:
+        t = (-mv*np.sin(ar)-d) / ayc
+        
+        t = np.linspace(0,ft)
+       
+print(mp4())
+#The value for the non - ideal motion from the equation x = Vo*t + (1/2)*ax*t**2
+nx = (mv*np.cos(ar)*t) + ((1/2)*axc*(t)**2)
+#The value of y from the equation y = Vo*t + (1/2)*ax*t**2
+y = (h + mv*np.sin(ar)*t) + ((1/2)*ayc*(t)**2)
+#The value for ideal motion 
+ix = mv*np.cos(ar)*t
+#For the Graphing of the projectile motion
+plt.ylabel('Height(m)')
+plt.xlabel('Distance(m)')
+plt.title('Machine Problem 4')
+plt.plot(nx,y,'m',label = 'Non-Ideal Motion')
+plt.plot(ix,y,'co',markerfacecolor = 'w', label = 'Ideal Motion')
+plt.legend(loc="upper right")
+plt.show
