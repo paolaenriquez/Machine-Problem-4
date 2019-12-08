@@ -1,0 +1,38 @@
+Ih = input('Enter intial height: ');
+Vi = input('Enter initial velocity: ');
+theta = input('Enter angle: ');
+acceX = input('Enter acceleration in x direction: ');
+acceY = input('Enter acceleration in y direction: ');
+if acceY == 0
+    error 'VERTICAL COMPONENT OF THE ACCELERATION SHOULD NOT BE EQUAL TO ZERO!!! TRY AGAIN!';
+else
+    acceGrav = 9.8;
+    veloX = Vi*cosd(theta);
+    veloY = Vi*sind(theta);
+    idtotalTime = 2*veloY/acceGrav;
+    idt = linspace(0,idtotalTime,100);
+    idX = veloX.*idt;
+    idY = [Ih];
+    for ide = 1:99
+        idy = veloY*idt(ide) - (acceGrav/2)*((idt(ide))^2);
+        idY(ide+1) = idy;
+    end
+    figure, plot(idX,idY,);
+    xlabel('x-axis')
+    ylabel('y-axis')
+    title('Machine Problem 4')
+    grid on;
+    hold on;
+    
+    ntotalTime = 2*veloY/acceY;
+    absnTotalTime = abs(ntotalTime)
+    nont = linspace(0,absnTotalTime,100);
+    nonX = veloX.*nont + (acceX/2).*nont.^2;
+    nonY = [Ih];
+    for non = 1:99
+        nony = veloY*nont(non) + (acceY/2)*((nont(non))^2);
+        nonY(non+1) = nony;
+    end
+    plot(nonX,nonY,'--r');
+    legend('ideal','non-ideal')
+end
